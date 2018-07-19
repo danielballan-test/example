@@ -6,6 +6,11 @@ cache:
     - $HOME/.cache/pip
     - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
 
+env:
+  global:
+    # Doctr deploy key for danielballan-test/example
+    - secure: "dL6zmaEE/fq713rKKh02LMS5ZQinEvv6xsampXKsSvxMVxypDPE+4M5Q5aHbLdBhJDXj4P9dCWPLcKLxpw3d6nPBRWVwR0CEJQLGU3ijHXoUEx4uFI9f9S28hAQZLZHNSMeA7e2v/+O7+VRnzgocUCAIt8HHKw1B1qGeUHBwortrLtS1aKiU0FiKYGPvlWtHuk6+KUbFu1pHAfoqRUU1mlRyw3xWVD7UUppWFO7UxUrbIjk5QzaljuiD0/O6ETUBu0RhKKa14+mkfiSpzObCocxgx1BrY1Mykwg49LihkW64uyjc9BbeEnmnI1BvclcIuDlq4bvMj8VStL9167Mz26vL74GU7sbk56eFSc64w59NqkIgyaV+LSAeBllvBJseCgjCXD20gsfom26W+hj+x4J9+CRvoVqcxnZ8bDTMOKg5ZhzJzTM9uQTzb6AcMG7uvMUER76of0OlNu+pcNAgHzo2uuEkRW0Xrg/lbBcv//jI0Gx3LFBQJXx+/vMaxFtbYpAeq+t95nq2t1DoEMULelQRgje8gTTRWuNjtltl0z7F1Y5HTExs5MLAc+pBtGoLgbfrEBK4jyxe1D/GP5hhlpMP8HcLI7K3aaxsHlMGizHyVSTTPSqUGdpeYyON54LN37Fps3Drm1LRutEWiZARQP0CYPq+3xH1Qcobe6fAly8="
+
 install:
   # Install this package and the packages listed in requirements.txt.
   - pip install .
@@ -19,4 +24,5 @@ script:
   - flake8 --max-line-length=115  # Enforce code style (but relax line length limit a bit).
   - set -e
   - make -C docs html  # Build the documentation.
+  - pip install doctr
   - doctr deploy --built-docs docs/build/html .
